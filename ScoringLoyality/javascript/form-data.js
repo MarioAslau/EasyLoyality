@@ -7,6 +7,7 @@ $(document).ready(function() {
             var cardExpiryMonth = $("#card-expiry-month").val();
             var cardExpiryYear = $("#card-expiry-year option:selected").text();
             var cardCVV = $("#card-cvv").val();
+            var cardAmount = $("#card-amount").val();
             var registerToLoyality = $('#register-loyality-check').is(":checked");
 
             var clientInfo = {
@@ -15,8 +16,9 @@ $(document).ready(function() {
                     cardExpiryMonth: cardExpiryMonth,
                     cardExpiryYear: cardExpiryYear,
                     cardCVV: cardCVV,
+                    cardAmount: cardAmount,
                     registerToLoyality: registerToLoyality,
-                    amount: 0
+                   
             };
 
             $.ajax({
@@ -31,6 +33,7 @@ $(document).ready(function() {
                                     $("#error-message").html(data['message']);
                             }
                     }
+           
             });
         
     });
