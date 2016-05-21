@@ -33,8 +33,8 @@ function validate_card_holder_name($holder_name) {
     
     
 //        if (not-ok)
-                $message = 'This field should contain only a-zA-Z0-9 characters.';
-                die(json_encode(new ErrorMessage('Name on Card', $message)));
+//                $message = 'This field should contain only a-zA-Z0-9 characters.';
+//                die(json_encode(new ErrorMessage('Name on Card', $message)));
 }
 
 function validate_card_number($card_number) {
@@ -59,3 +59,5 @@ validate_card_number($cardNumber);
 validate_card_expiry_month($cardExpiryMonth);
 validate_card_expiry_year($cardExpiryYear);
 validate_card_cvv($cardCVV);
+
+
