@@ -3,7 +3,7 @@
 <?php
         include "config.php";
 ?>
-<!--DD -->
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -47,6 +47,12 @@
                         <label class="col-sm-3 control-label" for="card-number">Card Number<span class="red-star">*</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="cvv">Card CVV<span class="red-star">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="cvv" id="card-cvv" placeholder="Security Code">
                         </div>
                     </div>
                     <div class="form-group">
@@ -87,10 +93,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="cvv">Card CVV<span class="red-star">*</span></label>
+                        <label class="col-sm-3 control-label" for="amount">Amount<span class="red-star">*</span></label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="cvv" id="card-cvv" placeholder="Security Code">
-                        </div>
+                            <input type="text" class="form-control" name="amount" id="card-amount" placeholder="Amount pay">
+                        </div> --
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
