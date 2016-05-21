@@ -1,5 +1,12 @@
 <?php
 
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$port = '3306';
+$db_name = 'easy_loyality';
+
+
 define("SCORING_LOYALITY_PATH", "ScoringLoyality/");
 define("LOYALITY_INDICATOR_PATH", "LoyalityIndicator/");
 
