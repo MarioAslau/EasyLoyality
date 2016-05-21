@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.Gateway.pojo.Card;
+import com.Gateway.pojo.GatewayResponse;
+import com.Gateway.service.FactoryClass;
+import com.Gateway.service.ProcessorService;
 import com.google.gson.Gson;
 
 public class PaymentGateway extends HttpServlet {
@@ -27,12 +30,12 @@ public class PaymentGateway extends HttpServlet {
 		//Json generate
 		final Gson gson = new Gson();
 				
-		String json = gson.toJson(card);
+		String json = gson.toJson(processTransaction(card));
 		//Json Response Writing
 		resp.setContentType("application/json");
 		PrintWriter out = resp.getWriter();
 		out.println(json);
-		
+				
 		
 	}
 	
@@ -46,6 +49,12 @@ public class PaymentGateway extends HttpServlet {
 		card.setCardCVV(req.getParameter("cardCVV"));
 		card.setRegisterToLoyality(req.getParameter("registerToLoyality"));
 		return card;		
+	}
+	
+	private GatewayResponse processTransaction(Card card){
+		ProcessorService processorService = FactoryClass.getProcessor(card);
+		GatewayResponse gatewayresp = processorService.processTransaction(card);		
+		return gatewayresp;	
 	}
 	
 }
