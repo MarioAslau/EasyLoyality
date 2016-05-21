@@ -3,7 +3,7 @@
 <?php
         include "config.php";
 ?>
-<!--DD -->
+<!-- test -->
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -50,6 +50,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-3 control-label" for="cvv">Card CVV<span class="red-star">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="cvv" id="card-cvv" placeholder="Security Code">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-3 control-label" for="expiry-month">Expiration Date<span class="red-star">*</span></label>
                         <div class="col-sm-9">
                             <div class="row">
@@ -87,9 +93,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="cvv">Card CVV<span class="red-star">*</span></label>
+                        <label class="col-sm-3 control-label" for="amount">Card amount<span class="red-star">*</span></label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="cvv" id="card-cvv" placeholder="Security Code">
+                            <input type="text" class="form-control" name="amount" id="card-amount" placeholder="Card amount">
                         </div>
                     </div>
                     <div class="form-group">
