@@ -105,7 +105,7 @@
                         <div class="col-sm-5 control-label" for="checkbox">
                         </div>
                         <div class="col-sm-5">
-                            <label name="checkbox"><input type="checkbox" value="" id="register-loyality-check"> Register to Loyalatity programs?</label>
+                            <label name="checkbox"><input type="checkbox" value="" id="register-loyality-check"> Register to Loyality programs?</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -120,6 +120,7 @@
             </form>
             
             <div id="response-box">
+                <p></p>
             </div>
         </div>
         

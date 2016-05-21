@@ -2,6 +2,7 @@ $(document).ready(function() {
     
     $("#button-send").click(function() {
             $(".alert").css('display', 'none');
+            $("#response-box").css('display', 'none');
             
             var cardHolderName = $("#card-holder-name").val();
             var cardNumber = $("#card-number").val();
@@ -27,25 +28,32 @@ $(document).ready(function() {
                     method: "POST",
                     dataType: 'json',
                     success: function(data) {
-                            $("#response-box").css("display", "block");
-                            if (data['type'] == 'error') {
-                                    $(".alert").css('display', 'block');
-                                    $("#error-field").html(data['field'] + "*:  ");
-                                    $("#error-message").html(data['message']);
-                                    $("#response-box").css({"background-color": "#F6CECE", "border-color" : "red"});
-                                    $("#response-box p").html("<strong>Transaction failed!</strong> ");
-                            }
-                            else {
+                            if (data['type'] == 'success') {
+                                    // Success
                                     $("#response-box").css("display", "block");
                                     $("#response-box p").html("<strong>Transaction succeeded!</strong> ");
                                     if (data['client_points'] != null) {
                                             $("#response-box p").append("You have <strong>" + data['client_points'] + "</strong> loyality points.");
                                     }
                             }
+                            else {
+                                    if (data['field'] != null) {
+                                            // Wrong format for field
+                                            $(".alert").css('display', 'block');
+                                            $("#error-field").html(data['field'] + "*:  ");
+                                            $("#error-message").html(data['message']);
+                                    }
+                                    else {
+                                            // Other error
+                                            $("#response-box").css({"background-color": "#F6CECE", "border-color" : "#FA5858"});
+                                            $("#response-box p").html("<strong>Transaction failed!</strong> ");
+                                    }
+                            }
                     },
                     error: function(data) {
+                            // AJAX error
                             $("#response-box").css("display", "block");
-                            alert("Something went wrong :(");
+                            alert('error!');
                     }
            
             });

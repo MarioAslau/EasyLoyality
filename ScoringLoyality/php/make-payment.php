@@ -11,7 +11,7 @@ die(json_encode(new ErrorMessage('Name on Card', 'more than 50 char')));
 
 preg_match("/[0-9A-Za-z ']{3,50}/", $cardHolderName, $regex_output);
 if (empty($regex_output) || $regex_output[0]!=$cardHolderName)
-	die(json_encode(new ErrorMessage('Name on Card', 'is not a  alfa numeric value')));
+	die(json_encode(new ErrorMessage('Name on Card', 'is not an alfa numeric value!')));
 
 
 
@@ -20,7 +20,7 @@ $cardNumber = empty($_POST['cardNumber']) ? die(error_empty_field('Card Number')
 
 preg_match("/[0-9]{16}/", $cardNumber, $regex_output);
 if (empty($regex_output) || $regex_output[0]!=$cardNumber)
-	die(json_encode(new ErrorMessage('Card Number', 'is not a  16 digi value')));
+	die(json_encode(new ErrorMessage('Card Number', 'is not a 16 digits number')));
 
 
 $cardExpiryMonth = empty($_POST['cardExpiryMonth']) ? die(error_empty_field('Expiration Date (month)')) : $_POST['cardExpiryMonth'];
@@ -46,7 +46,7 @@ if ( time() >= $cardExpiryDate)
 $cardCVV = empty($_POST['cardCVV']) ? die(error_empty_field('Card CVV')) : $_POST['cardCVV'];
 preg_match("/[0-9']{3}/", $cardCVV, $regex_output);
 if (empty($regex_output) || $regex_output[0]!=$cardCVV)
-	die(json_encode(new ErrorMessage('Card CVV', 'is not 3 char lenght')));
+	die(json_encode(new ErrorMessage('Card CVV', 'is not 3 digits long')));
 
 $cardAmount = empty($_POST['cardAmount']) ? die(error_empty_field('Card Amount')) : $_POST['cardAmount'];
 $cardAmountFloat = intval($cardAmount);
@@ -80,14 +80,15 @@ class ErrorMessage {
 // All information is now checked and valid
 
 
-function request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVV, $registerToLoyality) {
-	$url = "http://localhost/HackTM2016EasyLoyality/ScoringLoyality/php/test-gateway.php";
+function request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVV, $registerToLoyality, $amount) {
+        $url = "http://172.16.3.61:8080/Gateway/pay";
 	$data = "cardHolderName=".$cardHolderName.
 		"&cardNumber=".$cardNumber.
 		"&cardExpiryMonth=".$cardExpiryMonth.
 		"&cardExpiryYear=".$cardExpiryYear.
 		"&cardCVV=".$cardCVV.
-                "&registerToLoiality=".$registerToLoyality;
+                "&registerToLoyality=".$registerToLoyality.
+                "&amount=".$amount;
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
@@ -106,44 +107,49 @@ function request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear
 	return $responseData;
 }
 
-$responseData = request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVV, $registerToLoyality);
+$responseData = request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVV, $registerToLoyality, $cardAmountFloat);
 $responseData = json_decode($responseData, true);
 
 $client_points = "";
-
+$token = '';
+$response_to_client = array('type' => 'error');
 
 switch ($responseData['resultCode']) {
        
     case "00": 
             // Success
-            $token = $responseData['token'];
-            if (!empty($token)) {
+            if (!empty($responseData['token'])) {
+                    $token = $responseData['token'];
                     calculate_points($token);
                     $client_points = get_client_points($token);
-                    $response_to_client = array('client_points' => $client_points);
-                    echo json_encode($response_to_client);
+                    $response_to_client = array('type' => 'success', 'client_points' => $client_points);
+            }
+            else {
+                    $response_to_client = array('type' => 'success');
             }
             break;
             
     case "01":
-        
+            $response_to_client['message'] = 'invalid card length';
             break;
         
     case "02": 
-        
+            $response_to_client['message'] = 'invalid expiry date';
             break;
         
     case "03":
-        
+            $response_to_client['message'] = 'invalid cvv';
             break;
     
     case "04":
-           
+            $response_to_client['message'] = 'invalid amount';
             break;
     
     default:
         
 }
+
+echo json_encode($response_to_client);
         
 
 function calculate_points($token) {
