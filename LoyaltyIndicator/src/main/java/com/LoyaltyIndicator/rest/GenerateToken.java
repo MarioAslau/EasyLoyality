@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.LoyaltyIndicator.pojo.LoyaltyIndicator;
+import com.LoyaltyIndicator.token.TokenGenerator;
+import com.LoyaltyIndicator.token.TokenGeneratorImpl;
 import com.google.gson.Gson;
 
 public class GenerateToken extends HttpServlet {
@@ -25,7 +27,8 @@ public class GenerateToken extends HttpServlet {
 		//send pan and get loyalty indicator
 		
 		//Token generation
-		LoyaltyIndicator token=getLoyaltyIndicator(pan);
+		TokenGenerator gen = new TokenGeneratorImpl();
+		LoyaltyIndicator token=gen.generateToken(pan);
 		
 		
 		//Json generate
@@ -40,10 +43,6 @@ public class GenerateToken extends HttpServlet {
 		
 	}
 	
-	private LoyaltyIndicator getLoyaltyIndicator(String pan){
-		LoyaltyIndicator token = new LoyaltyIndicator();
-		token.setToken("bla" + pan);
-		return token;
-	};
+
 
 }
