@@ -1,6 +1,6 @@
 <?php
 
-//include_once PHP_PATH.'database.php';
+include_once 'database.php';
 
 
 $cardHolderName = empty($_POST['cardHolderName']) ? die(error_empty_field('Name on Card')) : $_POST['cardHolderName'];
@@ -81,7 +81,7 @@ class ErrorMessage {
 
 
 function request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVV, $registerToLoyality) {
-	$url = "php/test-gateway.php";
+	$url = "http://localhost/HackTM2016EasyLoyality/ScoringLoyality/php/test-gateway.php";
 	$data = "cardHolderName=".$cardHolderName.
 		"&cardNumber=".$cardNumber.
 		"&cardExpiryMonth=".$cardExpiryMonth.
@@ -120,7 +120,8 @@ switch ($responseData['resultCode']) {
             if (!empty($token)) {
                     calculate_points($token);
                     $client_points = get_client_points($token);
-                    echo "Client Points: " + $client_points;
+                    $response_to_client = array('client_points' => $client_points);
+                    echo json_encode($response_to_client);
             }
             break;
             
@@ -146,19 +147,17 @@ switch ($responseData['resultCode']) {
         
 
 function calculate_points($token) {
-        echo "Calculating points...";
         global $db_connection;
         
         $insert_score_query = "INSERT INTO scores(user_token, loyality_points)
                     VALUES('$token', '1')
                 ON DUPLICATE KEY UPDATE loyality_points = loyality_points + 1";
-        
+
         $db_connection->query_db($insert_score_query);
 }
 
 
 function get_client_points($token) {
-        echo "Getting client points...";
         global $db_connection;
         $client_points = 0;
         
