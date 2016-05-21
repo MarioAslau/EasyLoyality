@@ -35,6 +35,9 @@ $(document).ready(function() {
         
     });
     
+    $(".form-control").on('keypress', function(event) {
+            $(".alert").css('display', 'none');
+    });
     
     
 });

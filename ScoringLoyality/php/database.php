@@ -1,6 +1,6 @@
 <?php
 
-include_once "config.php";
+include_once "../../config.php";
 
 $db_connection = new DatabaseConnect($servername, $username, $password, $db_name);
 

@@ -1,6 +1,7 @@
 <?php
 
-include_once PHP_PATH.'database.php';
+include_once "../../config.php";
+include_once 'database.php';
 
 
 $cardHolderName = empty($_POST['cardHolderName']) ? die(error_empty_field('Name on Card')) : $_POST['cardHolderName'];
@@ -67,16 +68,9 @@ validate_card_cvv($cardCVV);
 // All information is now checked and valid
 
 
-function request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVV, $registerToLoiality) {
+function request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVV, $registerToLoyality) {
 	$url = "php/test-gateway.php";
-	$data = "authentication.userId=8a8294174b7ecb28014b9699220015cc" .
-		"&authentication.password=sy6KJsT8" .
-		"&authentication.entityId=8a8294174b7ecb28014b9699220015ca" .
-		"&amount=92.00" .
-		"&currency=EUR" .
-		"&paymentBrand=VISA" .
-		"&paymentType=DB" .
-		"&cardHolderName=".$cardHolderName.
+	$data = "cardHolderName=".$cardHolderName.
 		"&cardNumber=".$cardNumber.
 		"&cardExpiryMonth=".$cardExpiryMonth.
 		"&cardExpiryYear=".$cardExpiryYear.
