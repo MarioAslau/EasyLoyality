@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<Context relodable="true" privileged="true" path="/loyalty">
+
+<Resource name="jdbc/LoyaltyDB" 
+			  global="jdbc/LoyaltyDB"
+			  factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+			  auth="Container"
+              type="javax.sql.DataSource"              
+			  username="admin"
+			  password="admin"
+			  driverClassName="org.h2.Driver"
+			  description="H2 DB"
+			  url="jdbc:h2:~/test:loyalty"
+			  maxTotal="10"
+			  maxIdle="10"
+			  maxWaitMillis="10000"
+			  removeAbandonedTimeout="300"			  
+			  defaultAutoCommit="true" />
+
+
+
+</Context>

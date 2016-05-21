@@ -6,3 +6,37 @@
     color: red;
     font-size: 120%;
 }
+
+#header {
+    text-align: center;
+    height: 100px;
+}
+
+#response-box {
+    font-size: 110%;
+    display: none;
+    height: 80px;
+    max-width: 700px;
+    background-color: #E6E6E6;
+    margin: auto; 
+    border-radius: 10px;
+    border: 2px solid #b2dba1;
+}
+
+#response-box p {
+    text-align: center;
+    font-family: 'Verdana' sans-serif;
+    margin: 20px;
+    line-height: 40px;
+}
+
+#card-holder-name,
+#card-cvv,
+#card-number,
+#card-amount {
+    width: 300px ;
+}
+
+legend {
+    text-align: center;
+}

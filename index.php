@@ -3,7 +3,7 @@
 <?php
         include "config.php";
 ?>
-<!--DD -->
+<!-- test -->
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -27,83 +27,102 @@
         <![endif]-->
     </head>
     <body>
-        <h1>Welcome to Loyalatity Points Program</h1>
-
+        <div id="header">
+            <h1>Welcome to Loyality Points Program</h1>
+        </div>
 
         <div class="container">
             <form class="form-horizontal" role="form">
                 <fieldset>
-                    <legend>Easy Loyalatity Register</legend>
+                    <legend>Easy Loyality Register</legend>
                     <div class="alert alert-danger">
                         <strong id="error-field"></strong><span id="error-message"></span>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="card-holder-name">Name on Card<span class="red-star">*</span></label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-5 control-label" for="card-holder-name">Name on Card<span class="red-star">*</span></label>
+                        <div class="col-sm-5">
                             <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="card-number">Card Number<span class="red-star">*</span></label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-5 control-label" for="card-number">Card Number<span class="red-star">*</span></label>
+                        <div class="col-sm-5">
                             <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="expiry-month">Expiration Date<span class="red-star">*</span></label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-5 control-label" for="cvv">Card CVV<span class="red-star">*</span></label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="cvv" id="card-cvv" placeholder="Security Code">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label" for="expiry-month">Expiration Date<span class="red-star">*</span></label>
+                        <div class="col-sm-5">
                             <div class="row">
-                                <div class="col-xs-3">
-                                    <select class="form-control col-sm-2" name="expiry-month" id="card-expiry-month">
-                                        <option>Month</option>
-                                        <option value="01">Jan (01)</option>
-                                        <option value="02">Feb (02)</option>
-                                        <option value="03">Mar (03)</option>
-                                        <option value="04">Apr (04)</option>
-                                        <option value="05">May (05)</option>
-                                        <option value="06">June (06)</option>
-                                        <option value="07">July (07)</option>
-                                        <option value="08">Aug (08)</option>
-                                        <option value="09">Sep (09)</option>
-                                        <option value="10">Oct (10)</option>
-                                        <option value="11">Nov (11)</option>
-                                        <option value="12">Dec (12)</option>
-                                    </select>
-                                </div>
-                                <div class="col-xs-3">
-                                    <select class="form-control" name="expiry-year" id="card-expiry-year">
-                                        <option>Year</option>
-                                        <option value="16">2016</option>
-                                        <option value="17">2017</option>
-                                        <option value="18">2018</option>
-                                        <option value="19">2019</option>
-                                        <option value="20">2020</option>
-                                        <option value="21">2021</option>
-                                        <option value="22">2022</option>
-                                        <option value="23">2023</option>
-                                    </select>
+                                <div id="card-expiry">
+                                    <div class="col-xs-4">
+                                        <select class="form-control col-sm-1" name="expiry-month" id="card-expiry-month">
+                                            <option>Month</option>
+                                            <option value="01">Jan (01)</option>
+                                            <option value="02">Feb (02)</option>
+                                            <option value="03">Mar (03)</option>
+                                            <option value="04">Apr (04)</option>
+                                            <option value="05">May (05)</option>
+                                            <option value="06">June (06)</option>
+                                            <option value="07">July (07)</option>
+                                            <option value="08">Aug (08)</option>
+                                            <option value="09">Sep (09)</option>
+                                            <option value="10">Oct (10)</option>
+                                            <option value="11">Nov (11)</option>
+                                            <option value="12">Dec (12)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <select class="form-control" name="expiry-year" id="card-expiry-year">
+                                            <option>Year</option>
+                                            <option value="16">2016</option>
+                                            <option value="17">2017</option>
+                                            <option value="18">2018</option>
+                                            <option value="19">2019</option>
+                                            <option value="20">2020</option>
+                                            <option value="21">2021</option>
+                                            <option value="22">2022</option>
+                                            <option value="23">2023</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="cvv">Card CVV<span class="red-star">*</span></label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="cvv" id="card-cvv" placeholder="Security Code">
+                        <label class="col-sm-5 control-label" for="amount">Card amount<span class="red-star">*</span></label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="amount" id="card-amount" placeholder="Card amount">
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <label class="checkbox-inline"><input type="checkbox" value="" id="register-loyality-check"> Register to Loyalatity programs?</label>
-                            <button type="button" class="btn btn-success" id="button-send">Send</button>
+                        <div class="col-sm-5 control-label" for="checkbox">
+                        </div>
+                        <div class="col-sm-5">
+                            <label name="checkbox"><input type="checkbox" value="" id="register-loyality-check"> Register to Loyalatity programs?</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-5 control-label" for="checkbox">
+                        </div>
+                        <div class="col-sm-5">
+                            <button type="button" class="btn btn-success" id="button-send" name="send">Send</button>
                         </div>
                     </div>
 
                 </fieldset>
             </form>
+            
+            <div id="response-box">
+            </div>
         </div>
-
-
+        
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
         <!-- Include all compiled plugins (below), or include individual files as needed -->
