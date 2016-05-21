@@ -37,7 +37,25 @@ function validate_card_holder_name($holder_name) {
                 die(json_encode(new ErrorMessage('Name on Card', $message)));
 }
 
+function validate_card_number($card_number) {
+        
+}
+
+function validate_card_expiry_month($expiry_month) {
+    
+}
+
+function validate_card_expiry_year($expiry_year) {
+    
+}
+
+function validate_card_cvv($cvv) {
+    
+}
+
 
 validate_card_holder_name($cardHolderName);
-
-
+validate_card_number($cardNumber);
+validate_card_expiry_month($cardExpiryMonth);
+validate_card_expiry_year($cardExpiryYear);
+validate_card_cvv($cardCVV);

@@ -35,7 +35,7 @@ include "config.php";
                 <fieldset>
                     <legend>Easy Loyalatity Register</legend>
                     <div class="alert alert-danger">
-                        <strong>Notice!</strong><span id="error-message"></span>
+                        <strong id="error-field"></strong><span id="error-message"></span>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>

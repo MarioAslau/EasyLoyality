@@ -16,7 +16,8 @@ $(document).ready(function() {
                     cardExpiryMonth: cardExpiryMonth,
                     cardExpiryYear: cardExpiryYear,
                     cardCVV: cardCVV,
-                    registerToLoyality: registerToLoyality
+                    registerToLoyality: registerToLoyality,
+                    amount: 0
             };
 
             $.ajax({
@@ -27,8 +28,8 @@ $(document).ready(function() {
                     success: function(data) {
                             if (data['type'] == 'error') {
                                     $(".alert").css('display', 'block');
-                                    $("#error-message").html(data['field'] + " : " + data['message']);
-                                    
+                                    $("#error-field").html(data['field'] + ":  ");
+                                    $("#error-message").html(data['message']);
                             }
                     }
             });
