@@ -15,6 +15,7 @@ public class AppContextListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {
 
 		try {
+			DataBaseManager.init();
 
 			Connection conn = DataBaseManager.getConnection();
 			Statement stat = conn.createStatement(); 
@@ -27,7 +28,7 @@ public class AppContextListener implements ServletContextListener {
 			stat.close();
 			conn.close();
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new RuntimeException("Could not initialize data base!", e);
 			
 		}
