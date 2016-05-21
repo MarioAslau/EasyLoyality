@@ -18,7 +18,6 @@ $(document).ready(function() {
                     cardCVV: cardCVV,
                     cardAmount: cardAmount,
                     registerToLoyality: registerToLoyality,
-                   
             };
 
             $.ajax({

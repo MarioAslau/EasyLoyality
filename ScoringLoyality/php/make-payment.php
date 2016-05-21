@@ -51,7 +51,7 @@ if (empty($regex_output) || $regex_output[0]!=$cardCVV)
 $cardAmount = empty($_POST['cardAmount']) ? die(error_empty_field('Card Amount')) : $_POST['cardAmount'];
 $cardAmountFloat = intval($cardAmount);
 if (!($cardAmountFloat >= 1))
-	die(json_encode(new ErrorMessage('Card Amount', 'is not a valid number')));
+	die(json_encode(new ErrorMessage('Card Amount', 'is not a valid number.')));
 
 
 $registerToLoyality = empty($_POST['registerToLoyality']) ? false : $_POST['registerToLoyality'];
