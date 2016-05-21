@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    $("#test").css("background-color", "red");
     
     $("#button-send").click(function() {
         
@@ -28,7 +27,7 @@ $(document).ready(function() {
                     success: function(data) {
                             if (data['type'] == 'error') {
                                     $(".alert").css('display', 'block');
-                                    $("#error-field").html(data['field'] + ":  ");
+                                    $("#error-field").html(data['field'] + "*:  ");
                                     $("#error-message").html(data['message']);
                             }
                     }

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
 <?php
-include "config.php";
+        include "config.php";
 ?>
-
+<!--DD -->
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -38,19 +38,19 @@ include "config.php";
                         <strong id="error-field"></strong><span id="error-message"></span>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
+                        <label class="col-sm-3 control-label" for="card-holder-name">Name on Card<span class="red-star">*</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="card-number">Card Number</label>
+                        <label class="col-sm-3 control-label" for="card-number">Card Number<span class="red-star">*</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="expiry-month">Expiration Date</label>
+                        <label class="col-sm-3 control-label" for="expiry-month">Expiration Date<span class="red-star">*</span></label>
                         <div class="col-sm-9">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -72,6 +72,7 @@ include "config.php";
                                 </div>
                                 <div class="col-xs-3">
                                     <select class="form-control" name="expiry-year" id="card-expiry-year">
+                                        <option>Year</option>
                                         <option value="16">2016</option>
                                         <option value="17">2017</option>
                                         <option value="18">2018</option>
@@ -86,7 +87,7 @@ include "config.php";
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
+                        <label class="col-sm-3 control-label" for="cvv">Card CVV<span class="red-star">*</span></label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" name="cvv" id="card-cvv" placeholder="Security Code">
                         </div>
