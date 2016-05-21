@@ -2,7 +2,6 @@
 
 <?php
         include "config.php";
-        include_once PHP_PATH.'database.php';
 ?>
 <!--DD -->
 <html lang="en">
