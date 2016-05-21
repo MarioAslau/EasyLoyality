@@ -80,16 +80,9 @@ class ErrorMessage {
 // All information is now checked and valid
 
 
-function request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVV, $registerToLoiality) {
+function request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVV, $registerToLoyality) {
 	$url = "php/test-gateway.php";
-	$data = "authentication.userId=8a8294174b7ecb28014b9699220015cc" .
-		"&authentication.password=sy6KJsT8" .
-		"&authentication.entityId=8a8294174b7ecb28014b9699220015ca" .
-		"&amount=92.00" .
-		"&currency=EUR" .
-		"&paymentBrand=VISA" .
-		"&paymentType=DB" .
-		"&cardHolderName=".$cardHolderName.
+	$data = "cardHolderName=".$cardHolderName.
 		"&cardNumber=".$cardNumber.
 		"&cardExpiryMonth=".$cardExpiryMonth.
 		"&cardExpiryYear=".$cardExpiryYear.
@@ -104,15 +97,84 @@ function request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$responseData = curl_exec($ch);
 	if(curl_errno($ch)) {
-		return curl_error($ch);
+		return array(
+                        "resultMessage" => 'Failed to fetch data.', 
+                        "resultCode" => '01'
+                );
 	}
 	curl_close($ch);
 	return $responseData;
 }
 
 $responseData = request($cardHolderName, $cardNumber, $cardExpiryMonth, $cardExpiryYear, $cardCVV, $registerToLoyality);
+$responseData = json_decode($responseData, true);
+
+$client_points = "";
 
 
+switch ($responseData['resultCode']) {
+       
+    case "00": 
+            // Success
+            $token = $responseData['token'];
+            if (!empty($token)) {
+                    calculate_points($token);
+                    $client_points = get_client_points($token);
+                    echo "Client Points: " + $client_points;
+            }
+            break;
+            
+    case "01":
+        
+            break;
+        
+    case "02": 
+        
+            break;
+        
+    case "03":
+        
+            break;
+    
+    case "04":
+           
+            break;
+    
+    default:
+        
+}
+        
+
+function calculate_points($token) {
+        echo "Calculating points...";
+        global $db_connection;
+        
+        $insert_score_query = "INSERT INTO scores(user_token, loyality_points)
+                    VALUES('$token', '1')
+                ON DUPLICATE KEY UPDATE loyality_points = loyality_points + 1";
+        
+        $db_connection->query_db($insert_score_query);
+}
+
+
+function get_client_points($token) {
+        echo "Getting client points...";
+        global $db_connection;
+        $client_points = 0;
+        
+        $get_points_query = "SELECT loyality_points
+                                FROM scores
+                            WHERE user_token='$token'";
+        
+        $result = $db_connection->query_db($get_points_query);
+        
+        $returned_rows = $db_connection->get_returned_rows();
+        if ($returned_rows > 0) {
+                $row = $result->fetch_array(MYSQLI_ASSOC);
+                $client_points = $row['loyality_points'];
+        }
+        return $client_points;
+}
 
 
 
