@@ -7,7 +7,7 @@ $(document).ready(function() {
             var cardHolderName = $("#card-holder-name").val();
             var cardNumber = $("#card-number").val();
             var cardExpiryMonth = $("#card-expiry-month").val();
-            var cardExpiryYear = $("#card-expiry-year option:selected").text();
+            var cardExpiryYear = $("#card-expiry-year").val();
             var cardCVV = $("#card-cvv").val();
             var cardAmount = $("#card-amount").val();
             var registerToLoyality = $('#register-loyality-check').is(":checked");
@@ -19,11 +19,11 @@ $(document).ready(function() {
                     cardExpiryYear: cardExpiryYear,
                     cardCVV: cardCVV,
                     cardAmount: cardAmount,
-                    registerToLoyality: registerToLoyality,
+                    registerToLoyality: registerToLoyality
             };
 
             $.ajax({
-                    url: "ScoringLoyality/php/make-payment.php",
+                    url: "http://172.16.3.249/HackTM2016EasyLoyality/ScoringLoyality/php/make-payment.php",
                     data: clientInfo,
                     method: "POST",
                     dataType: 'json',
@@ -48,12 +48,13 @@ $(document).ready(function() {
                                             $("#response-box").css({"background-color": "#F6CECE", "border-color" : "#FA5858"});
                                             $("#response-box p").html("<strong>Transaction failed!</strong> ");
                                     }
-                            }
+									
+							}
+							
                     },
                     error: function(data) {
                             // AJAX error
-                            $("#response-box").css("display", "block");
-                            alert('error!');
+                            console.log(data);
                     }
            
             });
