@@ -1,13 +1,18 @@
 package com.LoyaltyIndicator;
 
-
 @SuppressWarnings("serial")
-public class LoyaltyException extends Exception{
+public class LoyaltyException extends Exception {
 
-	public LoyaltyException(String message, Exception e){
-		
+	public LoyaltyException(String message, Exception e) {
+
 		super(message, e);
-		
+
 	}
-	
+
+	public LoyaltyException(String message) {
+
+		super(message);
+
+	}
+
 }
