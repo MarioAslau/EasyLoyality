@@ -20,9 +20,12 @@ public class TokenGeneratorImpl implements TokenGenerator {
 
 		LoyaltyIndicator loyaltyIndicator = new LoyaltyIndicator();
 		try {
+			if (cardNumber == null) {
+
+				throw new LoyaltyException("Null cardNumber");
+			}
 
 			String hash = generateHash(cardNumber);
-
 			String uuid = getUUIDForHash(hash);
 			if (uuid == null) {
 				uuid = UUID.randomUUID().toString().replaceAll("-", "");
@@ -36,6 +39,7 @@ public class TokenGeneratorImpl implements TokenGenerator {
 		}
 		return loyaltyIndicator;
 	}
+
 
 	private void insertUUIDForHash(String panHash, String randId) throws SQLException {
 		try (Connection conn = DataBaseManager.getConnection();
@@ -59,21 +63,18 @@ public class TokenGeneratorImpl implements TokenGenerator {
 
 	private String getUUIDForHash(String hash) throws LoyaltyException {
 
-		try {
-			Connection conn = DataBaseManager.getConnection();
-			PreparedStatement stat = conn.prepareStatement("SELECT randId FROM Loyalty WHERE panHash =  ? "); // (3)
+		try (Connection conn = DataBaseManager.getConnection();
+				PreparedStatement stat = conn.prepareStatement("SELECT randId FROM Loyalty WHERE panHash =  ? ")) {
+
 			stat.setString(1, hash);
+			try (ResultSet rs = stat.executeQuery()) {
 
-			ResultSet rs = stat.executeQuery();
-
-			String uuid = null;
-			if (rs.next()) {
-				uuid = rs.getString(1);
+				String uuid = null;
+				if (rs.next()) {
+					uuid = rs.getString(1);
+				}
+				return uuid;
 			}
-			rs.close();
-			stat.close();
-			conn.close();
-			return uuid;
 
 		} catch (SQLException e) {
 			throw new LoyaltyException("Could not get uuid!", e);
