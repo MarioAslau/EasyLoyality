@@ -28,27 +28,23 @@ public class TokenGeneratorImpl implements TokenGenerator {
 				uuid = UUID.randomUUID().toString().replaceAll("-", "");
 				insertUUIDForHash(hash, uuid);
 			}
-			 loyaltyIndicator = new LoyaltyIndicator();
+			loyaltyIndicator = new LoyaltyIndicator();
 			loyaltyIndicator.setToken(uuid);
 		} catch (Exception e) {
 			loyaltyIndicator.setToken("Err!");
 			e.printStackTrace();
-		} 
+		}
 		return loyaltyIndicator;
 	}
 
 	private void insertUUIDForHash(String panHash, String randId) throws SQLException {
+		try (Connection conn = DataBaseManager.getConnection();
+				PreparedStatement stat = conn.prepareStatement("insert into Loyalty(panHash,randId) values( ? , ?)")) {
+			stat.setString(1, panHash);
+			stat.setString(2, randId);
 
-		Connection conn = DataBaseManager.getConnection();
-		PreparedStatement stat = conn.prepareStatement("insert into Loyalty(panHash,randId) values( ? , ?)");
-		stat.setString(1, panHash);
-		stat.setString(2, randId);
-
-		stat.executeUpdate();
-
-		stat.close();
-		conn.close();
-
+			stat.executeUpdate();
+		}
 	}
 
 	private String generateHash(String cardNumber) throws UnsupportedEncodingException, NoSuchAlgorithmException {
