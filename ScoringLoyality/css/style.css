@@ -40,3 +40,13 @@
 legend {
     text-align: center;
 }
+
+#button-send {
+    width: 12em;  height: 3em;
+    color: black;
+    text-decoration: true;
+    text-align: center;
+    font-weight: bold;
+    font-size:100%;
+    margin-left:50px;
+}
