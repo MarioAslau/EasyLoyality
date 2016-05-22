@@ -48,18 +48,17 @@ public class LoyaltyTransactionProcessor extends ProcessorService {
 				is = conn.getInputStream();
 
 			resultString = IOUtils.toString(is);
-		} catch (Exception e) {
+			
+			final Gson gson = new Gson();
+
+			LoyaltyTokenResponse token = gson.fromJson(resultString, LoyaltyTokenResponse.class);
+			// Json Response Writing
+			gatewayresp.setToken(token.getToken());
+			
+		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-		final Gson gson = new Gson();
-
-		LoyaltyTokenResponse token = gson.fromJson(resultString, LoyaltyTokenResponse.class);
-		// Json Response Writing
-		gatewayresp.setToken(token.getToken());
-		
-		
+		}		
 
 	}
 
